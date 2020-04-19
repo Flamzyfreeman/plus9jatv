@@ -1,1 +1,82 @@
+{% extends "layout.html" %}
 
+{% block content %}
+
+<header id="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9 header">
+
+                <h1>Hello</h1>
+
+            </div>
+            <div class="col-md-2 social">
+                FaceBook
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-9 mt-5">
+            <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                {% for post in posts %}
+               
+                {% endfor %}
+                
+            </div>
+            
+        </div>
+        <div class="col-xs-12 col-md-3 mt-5">
+            
+            <h2 class="section-title">Search</h2>
+            <form action="index.html" method="post">
+                <input type="text" name="search-term" class="text-input" placeholder="Search...">
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+<section>
+    
+    <div class="content clearfix">
+        <!--- ==========Main Content ------------------>
+        <div class="main-content">
+    
+            <h1 class="p-title">Recent Posts</h1>
+            <!------------------------------------->
+            {% for post in posts %}
+            <div class="post clearfix">
+                <img src="{{ url_for('static', filename='candidate_images/'+ post.image) }}" alt="" class="post-image">
+                <div class="post-preview">
+                    <h2>{{post.title}}</a></h2><br>
+                    <i class="mr-2 ion-android-person"> <a href="#">{{ post.author.username }}</a></i>
+                    <i class="mr-2 ion-clock"> {{ post.pub_date.strftime('%B, %d, %Y') }}</i>
+                    <i class="mr-2 ion-ios-chatbubble-outline"> {{ post.comments }} Comments</a></i>
+                    <i class="mr-2 ion-eye"> {{ post.views }}</i>
+                    <br>
+                    <br>
+                    <p class="preview-text">
+                        {{post.body |truncate(150, True)}}
+                    </p>
+                    <a href="#" class="btn read-more">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <!--====-====End Main Content ------------------>
+        <!---========== Sidebar Main Content ------------------>
+        <div class="sidebar">
+            <div class="section search">
+                <h2 class="section-title">Search</h2>
+                <form action="index.html" method="post">
+                    <input type="text" name="search-term" class="text-input" placeholder="Search...">
+                </form>
+            </div>
+        </div>
+    </div>    
+</section>
+
+{% endblock %}
